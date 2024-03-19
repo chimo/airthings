@@ -20,20 +20,23 @@ class Airthings_Client {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://accounts-api.airthings.com/v1/token");
-        // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
         $response = curl_exec($ch);
         curl_close($ch);
 
+        $response_obj = json_decode($response);
+        $access_token = $response_obj->access_token;
+        $this->token = $access_token;
 
-        // TODO: Set token
-        // $this->token = "";
-        return $response;
+        return $access_token;
     }
 
-    public function get_samples($token, $serial_number) {
+    public function get_samples($serial_number) {
         $url = "https://ext-api.airthings.com/v1/devices/" . $serial_number . "/latest-samples";
 
         $ch = curl_init();
@@ -44,6 +47,8 @@ class Airthings_Client {
         ]);
         $response = curl_exec($ch);
         curl_close($ch);
+
+        return $response;
     }
 }
 

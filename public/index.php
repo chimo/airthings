@@ -7,7 +7,8 @@ require '../private/lib/Airthings.php';
 if (
     !isset($config['secret']) ||
     !isset($config['airthings_client_id']) ||
-    !isset($config['airthings_client_secret'])
+    !isset($config['airthings_client_secret']) ||
+    !isset($config['airthings_serial_number'])
 ) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
     exit(0);
@@ -30,13 +31,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
 }
 
 function get() {
+    global $config;
+
     $client_id = $config['airthings_client_id'];
     $client_secret = $config['airthings_client_secret'];
+    $serial_number = $config['airthings_serial_number'];
 
     $Airthings_Client = new Airthings_Client($client_id, $client_secret);
-    $token = $Airthing_Client->get_token();
+
+    $token = $Airthings_Client->get_token();
+    $samples = $Airthings_Client->get_samples($serial_number);
 
     header('Content-Type: application/json; charset=utf-8');
-    echo $token;
+    echo $samples;
 }
 
