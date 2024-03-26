@@ -4,7 +4,7 @@ Simple PHP script to GET samples from the [Airthings
 API](https://developer.airthings.com/docs/consumer/api/getting-started) for a
 specific device.
 
-It currently has a single endpoint, which expects a "Secrets" HTTP header:
+It currently has a single endpoint, which expects a "Secrets" HTTP header:  
 `wget -q -O- --header 'Secret: xxx' https://example.org`
 
 ## Depenencies
