@@ -97,7 +97,6 @@ class Airthings_Client {
         );
 
         $response_obj = json_decode($response);
-        error_log(print_r($response, true));
         $data = $response_obj->data;
         $response = json_encode($data);
 
