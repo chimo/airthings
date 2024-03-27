@@ -7,6 +7,9 @@ specific device.
 It currently has a single endpoint, which expects a "Secrets" HTTP header:  
 `wget -q -O- --header 'Secret: xxx' https://example.org`
 
+An Alpine Linux APKBUILD is available for it at
+[~chimo/apkbuilds/airthings](https://git.srht.chromic.org/~chimo/apkbuilds/tree/master/item/airthings).
+
 ## Depenencies
 
 * PHP APCU extension (php-pecl-apcu)
